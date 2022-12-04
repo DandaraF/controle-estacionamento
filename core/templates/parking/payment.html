@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Pagamento{% endblock %}
+
+
+{% block content %}
+
+{% include 'schedules.html' %}
+
+<div class="offset-1 col-10 list-div">
+
+    <h1>Efetuar o pagamento</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{form|crispy}}
+
+        <input type="submit" class="btn btn-success" value="Efetuar o pagamento">
+
+    </form>
+
+</div>
+
+
+
+{% endblock %}

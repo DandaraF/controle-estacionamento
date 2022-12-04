@@ -1,0 +1,106 @@
+{% extends 'base.html' %} {% block title %}Estacionamento{% endblock %}
+
+
+{% block content %}
+
+<div class="offset-1 col-10 list-div">
+    <h1>Estacionamento</h1>
+    <a id="add-link" href="parking">
+        <div class="col-3 add-div ">
+            <i class="fa fa-plus"></i> Adicionar veiculo
+        </div>
+    </a>
+
+    <div class="col-8 search-div">
+        <form method="GET" id="search-form">
+            <input class="form-control" type="text" id="search" name="search" placeholder="Digite a placa do veículo para buscar..." value="{{ request.GET.search }}">
+            <i class="fas fa-search" id="search-btn"></i>
+        </form>
+    </div>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="alert alert-{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr class="header-table">
+            <th scope="col">id</th>
+            <th scope="col">Código</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Placa</th>
+            <th scope="col">Veículo</th>
+            <th scope="col">Data Entrada</th>
+            <th scope="col">Valor</th>
+            <th scope="col">Situação</th>
+            <th scope="col">Pagar</th>
+            <th scope="col">Saída</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Excluir</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for parking in parkings %}
+
+        <tr>
+            <td>{{parking.id}}</td>
+            <td>{{parking.code}}</td>
+            <td>{{parking.client}}</td>
+            <td>{{parking.plate}}</td>
+            <td>{{parking.vehicle}}</td>
+            <td>{{parking.date_input}}</td>
+            <td>R$ {{parking.value}}</td>
+            {% if parking.paid == False%}
+            <td>Em aberto</td>
+            {% endif %}
+            {% if parking.paid == True%}
+            <td>Pago</td>
+            {% endif %}
+            <td><a href="/parking/{{parking.id}}/pay"><i class="fa-solid fa-money-bill"></i></a></td>
+            <td>
+                <a href="/parking/{{parking.id}}/out" class="out-btn">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </a>
+            </td>
+            <td>
+                <a href="/edit/{{parking.id}}"><i class="fas fa-edit"></i></a>
+            </td>
+
+            <td>
+                <a href="/delete/{{parking.id}}" class="delete-btn">
+                    <i class="fas fa-trash"></i>
+                </a>
+            </td>
+
+        </tr>
+        {% endfor%}
+        </tbody>
+
+
+    </table>
+
+    <div class="pagination">
+      <span class="step-links">
+        {% if parkings.has_previous %}
+          <a href="?page={{parkings.previous_page_number}}"><i class="fa-solid fa-circle-chevron-left"></i></a>
+        {% endif %}
+
+      {% if parkings.paginator.num_pages %}
+      <span class="current">
+          {{parkings.number}} de {{parkings.paginator.num_pages}}
+      </span>
+      {% endif %}
+
+        {% if parkings.has_next %}
+          <a href="?page={{parkings.next_page_number}}"><i class="fa-solid fa-circle-chevron-right"></i></a>
+        {% endif %}
+      </span>
+
+    </div>
+</div>
+
+{% endblock %}
