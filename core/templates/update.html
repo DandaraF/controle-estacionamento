@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p>ID: {{plate.id}} </p>
+<p>Placa: {{plate.plate}} </p>
+<p>Data entrada: {{plate.date_input}} </p>
+
+
+<form action="{% url 'update' plate.id %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="plate" value="{{plate.plate}}">
+
+    <button type="submit">Salvar</button>
+</form>
+</body>
+</html>
