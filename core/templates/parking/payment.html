@@ -5,11 +5,13 @@
 
 {% block content %}
 
-{% include 'schedules.html' %}
 
 <div class="offset-1 col-10 list-div">
 
-    <h1>Efetuar o pagamento</h1>
+    <h1>Pagamento</h1>
+
+{% include 'parking/schedules.html' %}
+
     <form method="POST">
         {% csrf_token %}
         {{form|crispy}}

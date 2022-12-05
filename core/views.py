@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Parking
 from .forms import ParkingForm, PaymentForm
@@ -21,11 +23,6 @@ def home(request):
         parkings = paginator.get_page(page)
 
     return render(request, 'home/index.html', {"parkings": parkings})
-
-
-def parkingview(request, id):
-    parking = get_object_or_404(Parking, pk=id)
-    return render(request, "parking/info.html", {"parking": parking})
 
 
 def newParking(request):
@@ -95,5 +92,41 @@ def payParking(request, id):
             return redirect('/')
 
     else:
-        return render(request, 'parking/edit_parking.html',
+        return render(request, 'parking/payment.html',
                       {'form': form, 'parking': parking})
+
+
+def payment(request, id):
+    parking = Parking.objects.get(id=id)
+    now = datetime.now()
+
+    datetime_payment = now - timedelta(hours=parking.date_input.hour,
+                                       minutes=parking.date_input.minute,
+                                       seconds=parking.date_input.second)
+    total_hour = datetime_payment.hour
+
+    if total_hour <= 1:
+        parking.value = 2
+
+    if 3 >= total_hour > 1:
+        parking.value = 4
+
+    if total_hour > 3:
+        parking.value = 4
+
+    parking.paid = True
+    parking.date_output = now
+    parking.save()
+    return redirect('/')
+
+
+def historicParking(request, plate):
+    parkings_list = Parking.objects.filter(plate=plate)
+
+    paginator = Paginator(parkings_list, 10)
+
+    page = request.GET.get('page')
+
+    parkings = paginator.get_page(page)
+
+    return render(request, 'parking/historic.html', {"parkings": parkings})
