@@ -1,15 +1,15 @@
-from django.urls import path, include
-from .views import (home,  newParking, editParking, deleteParking,
-                    outParking, payParking, historicParking)
+from django.urls import path
+
+from core.views import ParkingViewSet
 
 urlpatterns = [
-    path("", home),
-    path("parking", newParking, name="new-parking"),
-    path("parking/<int:id>/out", outParking, name="out-parking"),
-    path("parking/<int:id>/pay", payParking, name="pay-parking"),
-    path("parking/<str:plate>", historicParking, name="historic-parking"),
-    path("edit/<int:id>", editParking, name="edit-parking"),
-    path("delete/<int:id>", deleteParking, name="delete-parking"),
+    path("", ParkingViewSet.get_parkings),
+    path("parking", ParkingViewSet.post, name="new-parking"),
+    path("parking/<int:id>/out", ParkingViewSet.output, name="out-parking"),
+    path("parking/<int:id>/pay", ParkingViewSet.payment, name="pay-parking"),
+    path("parking/<str:plate>", ParkingViewSet.historic, name="historic"),
+    path("edit/<int:id>", ParkingViewSet.update, name="edit-parking"),
+    path("delete/<int:id>", ParkingViewSet.delete, name="delete-parking"),
 
     # path("salvar/", salvar, name="salvar"),
     # path("update/<int:id>", update, name="update"),
