@@ -7,6 +7,8 @@ Projeto consiste em um API de controle de estacionamento, que:
 * Fornece um histórico por placa
 * Validar máscara AAA-9999
 
+![django.gif](..%2F..%2F..%2F..%2FV%C3%ADdeos%2Fdjango.gif)
+
 ## Tecnologia
 
 * Django
@@ -45,4 +47,5 @@ Projeto consiste em um API de controle de estacionamento, que:
 
 * Histórico: http://127.0.0.1:8000/parking/{placa}
   
+
 

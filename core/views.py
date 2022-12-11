@@ -22,13 +22,12 @@ class ParkingViewSet(viewsets.ViewSet):
 
         if search:
             parkings = Parking.objects.filter(
-                plate__icontains=search).order_by("-date_input")
+                plate__icontains=search).order_by("-date_input", "-paid")
 
         else:
-            parkings_list = Parking.objects.filter(left=False).order_by(
-                "-paid")
+            parkings_list = Parking.objects.order_by("-date_input",  "paid", "date_output")
 
-            paginator = Paginator(parkings_list, 12)
+            paginator = Paginator(parkings_list, 10)
 
             page = request.GET.get('page')
 
@@ -132,6 +131,8 @@ class ParkingViewSet(viewsets.ViewSet):
                      "date_output": p.date_output,
                      "time": p.total_time(p.date_input)}
                     for p in parkings_filted]
+
+
 
         return render(request, 'historic/historic.html',
                       {"parkings": parkings})

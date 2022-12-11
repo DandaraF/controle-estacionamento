@@ -10,8 +10,4 @@ urlpatterns = [
     path("parking/<str:plate>", ParkingViewSet.historic, name="historic"),
     path("edit/<int:id>", ParkingViewSet.update, name="edit-parking"),
     path("delete/<int:id>", ParkingViewSet.delete, name="delete-parking"),
-
-    # path("salvar/", salvar, name="salvar"),
-    # path("update/<int:id>", update, name="update"),
-    # path("delete/<int:id>", delete, name="delete")
 ]
