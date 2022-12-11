@@ -15,36 +15,6 @@ def random_code(size=8, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
 
-# class PaymentViewSet(viewsets.ViewSet):
-#     @staticmethod
-#     def total_time(date_input: datetime, date_now: datetime):
-#         diff = abs(relativedelta(date_input, date_now))
-#
-#         if diff.days > 0:
-#             total_hours = (diff.days * 24) + diff.hours
-#             return f'{total_hours} horas e {diff.minutes} minutos'
-#
-#         return f'{diff.hours} horas e {diff.minutes} minutos'
-
-
-# def home(request):
-#     search = request.GET.get('search')
-#
-#     if search:
-#         parkings = Parking.objects.filter(plate__icontains=search)
-#
-#     else:
-#         parkings_list = Parking.objects.filter(left=False)
-#
-#         paginator = Paginator(parkings_list, 10)
-#
-#         page = request.GET.get('page')
-#
-#         parkings = paginator.get_page(page)
-#
-#     return render(request, 'home/index.html', {"parkings": parkings})
-
-
 class ParkingViewSet(viewsets.ViewSet):
     @staticmethod
     def get_parkings(request):
@@ -87,12 +57,13 @@ class ParkingViewSet(viewsets.ViewSet):
 
         if request.method == 'POST':
             form = ParkingForm(request.POST, instance=parking)
-
             if form.is_valid():
+                print('é valido')
                 parking.save()
                 return redirect('/')
 
         else:
+            print('não')
             return render(request, 'parking/edit_parking.html',
                           {'form': form, 'parking': parking})
 

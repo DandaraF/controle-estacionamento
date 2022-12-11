@@ -26,8 +26,11 @@
                 <td>{{parking.client}}</td>
                 <td>{{parking.vehicle}}</td>
                 <td>{{parking.date_input}}</td>
+                {% if parking.left == True %}
+                <td>{{parking.date_output}}</td>
+                {% else %}
                 <td><a href="/parking/{{parking.id}}/out" class="output-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></td>
-
+                {% endif %}
                 {% if parking.paid == True %}
                     <td>Pago</td>
                     <td>R$ {{parking.value}}</td>
