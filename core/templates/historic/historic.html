@@ -16,7 +16,6 @@
             <th scope="col">Data Entrada</th>
             <th scope="col">Data Saída</th>
             <th scope="col">Tempo total</th>
-            <th scope="col">Status pagamento</th>
             <th scope="col">Valor pago</th>
 
         </tr>
@@ -40,45 +39,22 @@
             {% endif %}
 
             {% if parking.paid == False %}
-            <td></td>
-            <td>Em aberto</td>
+                <td></td>
             {% endif %}
-
             {% if parking.paid == True %}
-            <td> {{parking.time}} </td>
-            <td>Pago</td>
+                <td> {{parking.time}} </td>
             {% endif %}
-
 
             <td>R$ {{parking.value}}</td>
         </tr>
         {% endfor%}
         </tbody>
 
-
     </table>
-
 
 </div>
 
-  <div class="pagination">
-      <span class="step-links">
-        {% if parkings.has_previous %}
-          <a href="?page={{parkings.previous_page_number}}"><i class="fa-solid fa-circle-chevron-left"></i></a>
-        {% endif %}
-
-      {% if parkings.paginator.num_pages %}
-      <span class="current">
-          {{parkings.number}} de {{parkings.paginator.num_pages}}
-      </span>
-      {% endif %}
-
-        {% if parkings.has_next %}
-          <a href="?page={{parkings.next_page_number}}"><i class="fa-solid fa-circle-chevron-right"></i></a>
-        {% endif %}
-      </span>
-
-    </div>
+  {% include 'pagination.html' %}
 
 
 {% endblock %}

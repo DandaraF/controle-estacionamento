@@ -1,0 +1,49 @@
+  <table class="table table-striped table-hover">
+        <thead>
+        <tr class="header-table">
+            <th scope="col">ID</th>
+            <th scope="col">Código</th>
+            <th scope="col">Placa</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Veículo</th>
+            <th scope="col">Data Entrada</th>
+            <th scope="col">Saída</th>
+            <th scope="col">Pagar</th>
+            <th scope="col">Valor Pago</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Excluir</th>
+            <th scope="col">Histórico</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for parking in parkings %}
+
+            <tr>
+                <td>{{parking.id}}</td>
+                <td>{{parking.code}}</td>
+                <td>{{parking.plate}}</td>
+                <td>{{parking.client}}</td>
+                <td>{{parking.vehicle}}</td>
+                <td>{{parking.date_input}}</td>
+                <td><a href="/parking/{{parking.id}}/out" class="output-btn"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></td>
+
+                {% if parking.paid == True %}
+                    <td>Pago</td>
+                    <td>R$ {{parking.value}}</td>
+                    <td></td>
+                    <td></td>
+                {% else %}
+                    <td><a href="/parking/{{parking.id}}/pay"><i class="fa-solid fa-money-bill"></i></a></td>
+                    <td></td>
+                    <td><a href="/edit/{{parking.id}}"><i class="fas fa-edit"></i></a></td>
+                    <td><a href="/delete/{{parking.id}}" class="delete-btn"><i class="fas fa-trash"></i></a></td>
+                {% endif %}
+                <td><a href="/parking/{{parking.plate}}"><i class="fa-regular fa-folder-open"></i></a></td>
+
+            </tr>
+        {% endfor%}
+        </tbody>
+
+
+    </table>

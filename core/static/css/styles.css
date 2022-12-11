@@ -27,28 +27,31 @@
 }
 
 
-/* Button add */
+/* Button */
 #add-link{
     text-decoration: none;
 }
 
 .btn{
     margin-top:20px;
-
 }
-.add-btn{
-    margin-right: 0;
 
-}
-/* .add-div {
-    background-color: #3476e2;
+.btn-add{
+    padding: 12px 28px;
+    background-color: #229c28;
+    text-decoration: none;
+    border-radius: 4px;
+    transition-duration: 0.4s;
+    color: white;
+    font-size: 20px;
     cursor: pointer;
-    display: inline-block;
-    color: #FFF;
-    padding: 8px;
-    border-radius: 5px;
-    margin-right: 25px;
-} */
+
+}
+
+.btn-add:hover {
+    background-color: #63a166; 
+    color: white;
+}
 
 .fa.fa-plus{
     color: #fff;
@@ -59,30 +62,31 @@
 .deactivate-btn{
     pointer-events: none;
 }
+
 /* Search */
 
-
-.search-div {
+.container-search{
     display: flex;
-    padding: 0;
-    background-color: red;
-
-
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
+    padding: 20px 0;
 }
 
-/* .fas.fa-search { */
-    /*position: absolute;*/
-    /* top: 12px;
-    right: 26px;
-    cursor: pointer;
-} */
+#search-form {
+    display: flex;
+    align-items: center;
+    width: 40%;
+    gap:20px;
 
+}
 
 /* Table */
 tr{
     text-align: center;
 }
-.fas.fa-trash, .fas.fa-edit, .fa-solid.fa-money-bill{
+.fas.fa-trash, .fas.fa-edit, .fa-solid.fa-money-bill, .fas.fa-search{
     cursor: pointer;
 }
 .fa-solid.fa-money-bill{
@@ -111,7 +115,7 @@ ul.messages li {
 }
 
 .step-links{
-    postion: relative;
+    position: relative;
     margin-left: auto;
     margin-right: auto;
 }
