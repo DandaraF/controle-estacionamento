@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Tuple
-
+from dateutil.relativedelta import relativedelta
 from rest_framework import viewsets
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Parking
@@ -13,17 +13,12 @@ from django.core.paginator import Paginator
 class PaymentViewSet(viewsets.ViewSet):
     @staticmethod
     def amount_to_pay(date_input: datetime, date_now: datetime):
+        diff = abs(relativedelta(date_input, date_now))
 
-        total_hour = date_now.hour - date_input.hour
+        if diff.days > 0:
+            return (diff.days * 24) + diff.hours
 
-        if date_now.date() == date_input and total_hour <= 3:
-            if total_hour <= 1:
-                return 2, total_hour
-            else:
-                return 4, total_hour
-        else:
-
-            return 10, total_hour
+        return diff.hours
 
 
 # def home(request):
@@ -87,9 +82,6 @@ class ParkingViewSet(viewsets.ViewSet):
             if form.is_valid():
                 parking.save()
                 return redirect('/')
-            else:
-                return render(request, 'parking/edit_parking.html',
-                              {'form': form, 'parking': parking})
 
         else:
             return render(request, 'parking/edit_parking.html',
@@ -122,46 +114,30 @@ class ParkingViewSet(viewsets.ViewSet):
     @staticmethod
     def payment(request, id: int):
         parking = get_object_or_404(Parking, pk=id)
+        form = PaymentForm(instance=parking)
 
         date_now = datetime.now()
         date_input = parking.date_input
-        amount, total_hour = PaymentViewSet.amount_to_pay(date_input,
-                                                          date_now)
+
+        total_hour = PaymentViewSet.amount_to_pay(date_input,
+                                                  date_now)
 
         if request.method == 'POST':
             form = PaymentForm(request.POST, instance=parking)
-
             if form.is_valid():
-                parking.value = amount
                 parking.paid = True
-                parking.save()
+                form.save()
 
-                return redirect('/')
+            return redirect('/')
 
         else:
-            form = PaymentForm(instance=parking)
-
-            parking.save()
             json_data = {'form': form,
                          'parking': parking,
-                         "date_now": date_now.strftime("%d/%m/%Y %H:%M"),
-                         "date_input": date_input.strftime("%d/%m/%Y %H:%M"),
-                         "total_hour": total_hour,
-                         "value": amount}
+                         "date_now": date_now,
+                         "date_input": date_input,
+                         "total_hour": total_hour}
 
             return render(request, 'parking/payment.html', json_data)
-
-        # if request.method == 'POST':
-        #     form = PaymentForm(request.POST, instance=parking)
-        #
-        #     if form.is_valid():
-        #         parking.save()
-        #         return redirect('/')
-        #
-        # else:
-        #     return render(request, 'parking/payment.html',
-        #                   {'form': form, 'parking': parking,
-        #                    "date_now": date_now, "date_input": date_input})
 
     @staticmethod
     def historic(request, plate):

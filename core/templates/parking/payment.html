@@ -18,6 +18,7 @@
         <tr>
             <th scope="col">Entrada</th>
             <th scope="col">Data atual</th>
+            <th scope="col">Veículo</th>
             <th scope="col">Horas totais</th>
         </tr>
         </thead>
@@ -25,23 +26,17 @@
         <tr>
             <td>{{date_input}}</td>
             <td>{{date_now}}</td>
-            {% if total_hour >= 10 %}
-                <td> + = 10</td>
-            {% else %}
-                <td>{{total_hour}}</td>
-            {% endif %}
+            <td>{{parking.vehicle}}</td>
+            <td>{{total_hour}}</td>
+
         </tr>
         </tbody>
     </table>
 
     <form method="POST">
         {% csrf_token %}
+        {{form|crispy}}
 
-        <div class="input-group mb-3">
-                <span class="input-group-text"> Valor a ser pago R$</span>
-            <input disabled class="form-control" type="text" name="value"
-                   value={{value}}>
-        </div>
         <input type="submit" class="btn btn-success"
                value="Efetuar o pagamento">
 

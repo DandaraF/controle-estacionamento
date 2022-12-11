@@ -1,5 +1,12 @@
+import random
+import string
 import uuid
+
 from django.db import models
+
+
+def random_generator(size=8, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 
 class Parking(models.Model):
@@ -13,8 +20,8 @@ class Parking(models.Model):
     # code = models.UUIDField(
     #     default=binascii.b2a_base64(os.urandom(6), newline=False),
     #     editable=False)
-    code = models.UUIDField(default=uuid.uuid4(), editable=False,
-                            verbose_name="Código")
+    code = models.CharField(max_length=8, default=random_generator(),
+                            editable=False, verbose_name="Código")
     plate = models.CharField(max_length=8, null=False,
                              verbose_name="Placa")
     value = models.FloatField(default=0, verbose_name="Valor")
