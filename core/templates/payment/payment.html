@@ -10,7 +10,7 @@
 
     <h1>Pagamento</h1>
 
-    {% include 'parking/schedules.html' %}
+    {% include 'payment/schedules.html' %}
 
     <h4 class="subtitle" style="text-align: center">Periodo</h4>
     <table class="table table-bordered">
@@ -24,10 +24,10 @@
         </thead>
         <tbody>
         <tr>
-            <td>{{date_input}}</td>
-            <td>{{date_now}}</td>
+            <td>{{parking.date_input}}</td>
+            <td>{{datetime_now}}</td>
             <td>{{parking.vehicle}}</td>
-            <td>{{total_hour}}</td>
+            <td>{{total_time}}</td>
 
         </tr>
         </tbody>

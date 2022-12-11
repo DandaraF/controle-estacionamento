@@ -12,4 +12,4 @@ class ParkingForm(forms.ModelForm):
 class PaymentForm(forms.ModelForm):
     class Meta:
         model = Parking
-        fields = ('value', 'paid')
+        fields = ('value',)
