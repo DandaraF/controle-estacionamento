@@ -7,7 +7,7 @@ Projeto consiste em um API de controle de estacionamento, que:
 - Fornece um histórico por placa
 - Validar máscara AAA-9999
 
-<img src="resentation_project.gif" alt="Apresentação do projeto">
+![presentation_project.gif](presentation_project.gif)
 
 ## Tecnologia
 
