@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Pagamento{% endblock %}
+
+{% block content %}
+
+<div class="offset-1 col-10 list-div">
+    <h1>Pagamento</h1>
+
+    {% include 'payment/schedules.html' %}
+
+    <h4 class="subtitle" style="text-align: center">Periodo</h4>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">Entrada</th>
+            <th scope="col">Data atual</th>
+            <th scope="col">Veículo</th>
+            <th scope="col">Horas totais</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{parking.date_input}}</td>
+            <td>{{datetime_now}}</td>
+            <td>{{parking.vehicle}}</td>
+            <td>{{total_time}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="alert alert-danger" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form method="POST" id="form-payment">
+        {% csrf_token %}
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">R$</span>
+            <input type="number" min="1" name="value" id="value"
+                   class="form-control" value="{{payment}}"/>
+        </div>
+        <input type="submit" class="btn btn-success bnt-payment"
+               value="Efetuar o pagamento"/>
+    </form>
+</div>
+
+{% endblock %}

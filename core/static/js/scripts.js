@@ -1,15 +1,16 @@
 $( document ).ready(function() {
-    var deleteBtn = $('.delete-btn');
-    var searchBtn = $('#search-btn');
-    var searchForm = $('#search-form');
-    var outBtn = $('.out-btn');
+    let deleteBtn = $('.delete-btn');
+    let outputBtn = $('.output-btn');
+    let searchBtn = $('#search-btn');
+    let searchForm = $('#search-form');
+    let paymentBtn = $('.bnt-payment');
 
     $(deleteBtn).on('click', function(e) {
 
         e.preventDefault();
 
-        var delLink = $(this).attr('href');
-        var result = confirm('Deseja excluir a entrada do veículo?');
+        let delLink = $(this).attr('href');
+        let result = confirm('Deseja excluir a entrada do veículo?');
 
         if(result) {
             window.location.href = delLink;
@@ -20,11 +21,15 @@ $( document ).ready(function() {
         searchForm.submit();
     });
 
-    $(outBtn).on('click', function() {
+    $(outputBtn).on('click', function(e) {
         e.preventDefault();
-        console.log('sim')
-//        alert("Saída não permitida. Pagamento em aberto!");
-    });
 
+        let delLink = $(this).attr('href');
+        let result = confirm('Deseja liberar a saída do veículo?');
+
+        if(result) {
+            window.location.href = delLink;
+        }
+    });
 
 });

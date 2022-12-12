@@ -1,0 +1,1 @@
+$('.mask-plate').mask("AAA-9999");

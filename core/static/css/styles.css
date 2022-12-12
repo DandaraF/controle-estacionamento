@@ -2,44 +2,59 @@
     padding:0;
 }
 
-.container-fluid .row {
-    margin: 0;
+.logo{
+    padding: 10px 0 10px 30px;
+    /* font-size: 30px; */
+    background-color: rgb(24, 23, 23);
 }
 
 /* Navbar */
-.navbar{
-    border-bottom: 1px solid #333;
-    margin-bottom: 20px;
+#navbarNav.nav-item.navbar-toggler-icon{
+    color: white;
+    background-color: #fff;
 }
 
-.navbar-brand{
-    font-weight: bold;
+.fa-solid.fa-square-parking{
+    color: white;
+    font-size: 40px;
+    padding: 10px;
 }
 
-.navbar-light .navbar-nav a.nav-link{
-    color: #333;
-    letter-spacing: 1px;
+#home-link{
+    color: #fff;
+    font-size: 25px;
+    padding-left: 20px;
 }
 
 /* Content */
 .list-div{
-    padding:0;
+    padding:15px 0;
 }
 
-
-/* Button add */
+/* Button */
 #add-link{
     text-decoration: none;
 }
 
-.add-div {
-    background-color: #3476e2;
+.btn{
+    margin-top:20px;
+}
+
+.btn-add{
+    padding: 10px 25px;
+    background-color: #229c28;
+    text-decoration: none;
+    border-radius: 4px;
+    transition-duration: 0.4s;
+    color: white;
+    font-size: 20px;
     cursor: pointer;
-    display: inline-block;
-    color: #FFF;
-    padding: 8px;
-    border-radius: 5px;
-    margin-right: 25px;
+}
+
+
+.btn-add:hover {
+    background-color: #63a166; 
+    color: white;
 }
 
 .fa.fa-plus{
@@ -48,37 +63,56 @@
     margin-left: 5px;
 }
 
-/* Search */
-.fas.fa-search {
-    /*position: absolute;*/
-    top: 12px;
-    right: 26px;
-    cursor: pointer;
+.deactivate-btn{
+    pointer-events: none;
 }
 
-.search-div {
-    padding: 0;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    display: inline-block;
+/* Search */
+.container-search{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 0 20px;
+}
+
+#search-form {
+    display: flex;
+    align-items: center;
+    width: 40%;
+    gap:4px;
 }
 
 /* Table */
 tr{
     text-align: center;
 }
-.fas.fa-trash, .fas.fa-edit, .fa-solid.fa-money-bill{
+
+/* icons  */
+.fas.fa-trash, .fas.fa-edit, .fa-solid.fa-money-bill, .fas.fa-search{
     cursor: pointer;
 }
+
+#search-btn{
+    font-size: 20px;
+    background-color: rgb(40, 50, 146);
+    padding: 7px;
+    border-radius: 50%;
+    color: #fff;
+}
+
 .fa-solid.fa-money-bill{
     color: #13c43f;
 }
+
 .fas.fa-trash{
     color: #db1e47;
 }
+
 .fas.fa-edit{
     color: #4682B4;
 }
+
 /* Messages */
 
 ul.messages {
@@ -96,7 +130,7 @@ ul.messages li {
 }
 
 .step-links{
-    postion: relative;
+    position: relative;
     margin-left: auto;
     margin-right: auto;
 }
@@ -106,16 +140,3 @@ ul.messages li {
     margin-right: 5px;
 }
 
-/* Footer */
-footer{
-    background-color: #333;
-    height: 300px;
-    border-top: 2px solid #202020;
-}
-
-footer p{
-    color: #f5f5f5;
-    text-align: center;
-    top: 50%;
-    position: relative;
-}

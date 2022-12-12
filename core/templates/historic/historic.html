@@ -4,70 +4,56 @@
 {% block content %}
 <div class="offset-1 col-10 list-div">
     <h1>Histórico</h1>
+
      <table class="table table-striped table-hover">
         <thead>
         <tr class="header-table">
-            <th scope="col">id</th>
-            <th scope="col">Código</th>
+            <th scope="col">ID</th>
             <th scope="col">Cliente</th>
+            <th scope="col">Código</th>
             <th scope="col">Placa</th>
             <th scope="col">Veículo</th>
             <th scope="col">Data Entrada</th>
-            <th scope="col">Data Saida</th>
+            <th scope="col">Data Saída</th>
+            <th scope="col">Tempo total</th>
             <th scope="col">Valor pago</th>
 
         </tr>
         </thead>
+
         <tbody>
         {% for parking in parkings %}
 
         <tr>
             <td>{{parking.id}}</td>
-            <td>{{parking.code}}</td>
             <td>{{parking.client}}</td>
+            <td>{{parking.code}}</td>
             <td>{{parking.plate}}</td>
             <td>{{parking.vehicle}}</td>
             <td>{{parking.date_input}}</td>
 
-            {% if parking.date_output != None %}
-
-            <td>{{parking.date_output}}</td>
-
+            {% if parking.date_output %}
+                <td>{{parking.date_output}}</td>
             {% else %}
+                <td></td>
+            {% endif %}
 
-            <td>Em aberto</td>
-
-            {% endif%}
+            {% if parking.paid == False %}
+                <td></td>
+            {% endif %}
+            {% if parking.paid == True %}
+                <td> {{parking.time}} </td>
+            {% endif %}
 
             <td>R$ {{parking.value}}</td>
         </tr>
         {% endfor%}
         </tbody>
 
-
     </table>
-
 
 </div>
 
-  <div class="pagination">
-      <span class="step-links">
-        {% if parkings.has_previous %}
-          <a href="?page={{parkings.previous_page_number}}"><i class="fa-solid fa-circle-chevron-left"></i></a>
-        {% endif %}
-
-      {% if parkings.paginator.num_pages %}
-      <span class="current">
-          {{parkings.number}} de {{parkings.paginator.num_pages}}
-      </span>
-      {% endif %}
-
-        {% if parkings.has_next %}
-          <a href="?page={{parkings.next_page_number}}"><i class="fa-solid fa-circle-chevron-right"></i></a>
-        {% endif %}
-      </span>
-
-    </div>
 
 
 {% endblock %}
